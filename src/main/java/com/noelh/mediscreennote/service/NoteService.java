@@ -78,7 +78,11 @@ public class NoteService {
      * @return the deleted note
      */
     public Note deleteNote(String id){
-        Note note = getNoteById(id);
+        Note noteToDelete = getNoteById(id);
+        Note note = new Note();
+        note.setId(noteToDelete.getId());
+        note.setPatientId(noteToDelete.getPatientId());
+        note.setNoteOfThePractitioner(noteToDelete.getNoteOfThePractitioner());
         noteRepository.deleteById(id);
         return note;
     }

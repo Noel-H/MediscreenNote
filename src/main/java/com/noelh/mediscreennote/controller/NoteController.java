@@ -28,7 +28,7 @@ public class NoteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Note> getNoteById(@PathVariable("id") Long id){
+    public ResponseEntity<Note> getNoteById(@PathVariable("id") String id){
         log.info("GET /note/{}", id);
         try {
             return ResponseEntity.ok(noteService.getNoteById(id));
@@ -40,12 +40,12 @@ public class NoteController {
 
     @PostMapping("")
     public ResponseEntity<Note> postNote(@RequestBody NoteDTO noteDTO){
-        log.info("POST /note : {} {}",noteDTO.getLastName(), noteDTO.getFirstName());
+        log.info("POST /note");
         return ResponseEntity.ok(noteService.addNote(noteDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Note> putNoteById(@PathVariable("id") Long id,@RequestBody NoteDTO noteDTO){
+    public ResponseEntity<Note> putNoteById(@PathVariable("id") String id,@RequestBody NoteDTO noteDTO){
         log.info("PUT /note/{}", id);
         try {
             return ResponseEntity.ok(noteService.updateNote(id, noteDTO));
@@ -56,7 +56,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Note> deleteNoteById(@PathVariable("id") Long id){
+    public ResponseEntity<Note> deleteNoteById(@PathVariable("id") String id){
         log.info("DELETE /note/{}", id);
         try {
             return ResponseEntity.ok(noteService.deleteNote(id));
