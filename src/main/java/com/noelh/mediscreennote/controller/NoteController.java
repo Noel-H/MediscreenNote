@@ -38,6 +38,12 @@ public class NoteController {
         }
     }
 
+    @GetMapping("/patientId/{patientId}")
+    public List<Note> getNoteListByPatientId(@PathVariable("patientId") Long patientId){
+        log.info("GET /note/{}", patientId);
+            return noteService.getNoteListByPatientId(patientId);
+    }
+
     @PostMapping("")
     public ResponseEntity<Note> postNote(@RequestBody NoteDTO noteDTO){
         log.info("POST /note");
