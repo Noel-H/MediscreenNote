@@ -2,6 +2,7 @@ package com.noelh.mediscreennote.service;
 
 import com.noelh.mediscreennote.dto.NoteDTO;
 import com.noelh.mediscreennote.model.Note;
+import com.noelh.mediscreennote.proxies.MediscreenPatientProxy;
 import com.noelh.mediscreennote.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,11 @@ public class NoteService {
 
     private final NoteRepository noteRepository;
 
-    public NoteService(NoteRepository noteRepository){
+    private final MediscreenPatientProxy mediscreenPatientProxy;
+
+    public NoteService(NoteRepository noteRepository, MediscreenPatientProxy mediscreenPatientProxy){
         this.noteRepository = noteRepository;
+        this.mediscreenPatientProxy = mediscreenPatientProxy;
     }
 
     /**
@@ -34,6 +38,9 @@ public class NoteService {
      * @return a list of note
      */
     public List<Note> getNoteListByPatientId(Long patientId) {
+        if (!mediscreenPatientProxy.isPatientIdExist(patientId)){
+            throw new NoSuchElementException("PatientId not found : "+patientId);
+        }
         return noteRepository.getNotesByPatientId(patientId);
     }
 

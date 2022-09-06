@@ -39,9 +39,14 @@ public class NoteController {
     }
 
     @GetMapping("/patientId/{patientId}")
-    public List<Note> getNoteListByPatientId(@PathVariable("patientId") Long patientId){
+    public ResponseEntity<List<Note>> getNoteListByPatientId(@PathVariable("patientId") Long patientId){
         log.info("GET /note/patientId/{}", patientId);
-            return noteService.getNoteListByPatientId(patientId);
+        try {
+            return ResponseEntity.ok(noteService.getNoteListByPatientId(patientId));
+        } catch (NoSuchElementException e){
+            log.error("GET /note/patientId/{} | [ERROR] : {}", patientId, e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("")
