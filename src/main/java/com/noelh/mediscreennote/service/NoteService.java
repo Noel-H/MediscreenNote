@@ -86,4 +86,10 @@ public class NoteService {
         noteRepository.deleteById(id);
         return note;
     }
+
+    public List<Note> deleteNoteByPatientId(Long patientId) {
+        List<Note> noteList = getNoteListByPatientId(patientId);
+        noteList.forEach(note -> deleteNote(note.getId()));
+        return noteList;
+    }
 }

@@ -71,4 +71,10 @@ public class NoteController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("patientId/{patientId}")
+    public List<Note> deleteNoteByPatientId(@PathVariable("patientId") Long patientId){
+        log.info("DELETE /note/patientId/{}", patientId);
+            return noteService.deleteNoteByPatientId(patientId);
+    }
 }
