@@ -37,7 +37,7 @@ public class NoteService {
      * @param patientId is the patientId of the note
      * @return a list of note
      */
-    public List<Note> getNoteListByPatientId(Long patientId) {
+    public List<Note> getNoteListByPatientId(Long patientId) throws NoSuchElementException{
         if (!mediscreenPatientProxy.isPatientIdExist(patientId)){
             throw new NoSuchElementException("PatientId not found : "+patientId);
         }
@@ -94,7 +94,7 @@ public class NoteService {
         return note;
     }
 
-    public List<Note> deleteNoteByPatientId(Long patientId) {
+    public List<Note> deleteNoteByPatientId(Long patientId) throws NoSuchElementException{
         List<Note> noteList = getNoteListByPatientId(patientId);
         noteList.forEach(note -> deleteNote(note.getId()));
         return noteList;

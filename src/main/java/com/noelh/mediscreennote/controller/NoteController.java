@@ -77,9 +77,14 @@ public class NoteController {
         }
     }
 
-    @DeleteMapping("patientId/{patientId}")
-    public List<Note> deleteNoteByPatientId(@PathVariable("patientId") Long patientId){
+    @DeleteMapping("/patientId/{patientId}")
+    public ResponseEntity<List<Note>> deleteNoteByPatientId(@PathVariable("patientId") Long patientId){
         log.info("DELETE /note/patientId/{}", patientId);
-            return noteService.deleteNoteByPatientId(patientId);
+        try {
+            return ResponseEntity.ok(noteService.deleteNoteByPatientId(patientId));
+        } catch (NoSuchElementException e){
+            log.error("DELETE /note/patientId/{} | [ERROR] : {}", patientId, e.getMessage());
+            return ResponseEntity.notFound().build();
+        }
     }
 }
