@@ -3,6 +3,8 @@ package com.noelh.mediscreennote.controller;
 import com.noelh.mediscreennote.dto.NoteDTO;
 import com.noelh.mediscreennote.model.Note;
 import com.noelh.mediscreennote.service.NoteService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.NoSuchElementException;
 @Slf4j
 @RestController
 @RequestMapping("/note")
+@Tag(name = "NoteController", description = "Api pour les opérations CRUD et plus sur les notes.")
 public class NoteController {
 
     private final NoteService noteService;
@@ -21,12 +24,14 @@ public class NoteController {
         this.noteService = noteService;
     }
 
+    @ApiOperation("Récupère une liste de toutes les notes")
     @GetMapping("")
     public List<Note> getNoteList(){
         log.info("GET /note");
         return noteService.getNoteList();
     }
 
+    @ApiOperation("Récupère une note grâce à un id donné")
     @GetMapping("/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable("id") String id){
         log.info("GET /note/{}", id);
@@ -38,6 +43,7 @@ public class NoteController {
         }
     }
 
+    @ApiOperation("Récupère une liste de note grâce à un patientId donné")
     @GetMapping("/patientId/{patientId}")
     public ResponseEntity<List<Note>> getNoteListByPatientId(@PathVariable("patientId") Long patientId){
         log.info("GET /note/patientId/{}", patientId);
@@ -49,12 +55,14 @@ public class NoteController {
         }
     }
 
+    @ApiOperation("Ajoute une nouvelle note")
     @PostMapping("")
     public ResponseEntity<Note> postNote(@RequestBody NoteDTO noteDTO){
         log.info("POST /note");
         return ResponseEntity.ok(noteService.addNote(noteDTO));
     }
 
+    @ApiOperation("Modifie une note déjà existante grâce à un id donné")
     @PutMapping("/{id}")
     public ResponseEntity<Note> putNoteById(@PathVariable("id") String id,@RequestBody NoteDTO noteDTO){
         log.info("PUT /note/{}", id);
@@ -66,6 +74,7 @@ public class NoteController {
         }
     }
 
+    @ApiOperation("Supprime une note grâce à un id donné")
     @DeleteMapping("/{id}")
     public ResponseEntity<Note> deleteNoteById(@PathVariable("id") String id){
         log.info("DELETE /note/{}", id);
@@ -77,6 +86,7 @@ public class NoteController {
         }
     }
 
+    @ApiOperation("Supprime une liste de note grâce à un patientId donné")
     @DeleteMapping("/patientId/{patientId}")
     public ResponseEntity<List<Note>> deleteNoteByPatientId(@PathVariable("patientId") Long patientId){
         log.info("DELETE /note/patientId/{}", patientId);
