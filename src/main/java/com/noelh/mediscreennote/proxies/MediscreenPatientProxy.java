@@ -4,6 +4,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * MediscreenPatient Proxy interface
+ */
 @FeignClient(name = "MediscreenPatient", url = "${MediscreenPatientUrl}")
 public interface MediscreenPatientProxy {
 

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ *
+ */
 @Slf4j
 @RestController
 @RequestMapping("/note")
@@ -20,10 +23,18 @@ public class NoteController {
 
     private final NoteService noteService;
 
+    /**
+     *
+     * @param noteService
+     */
     public NoteController(NoteService noteService){
         this.noteService = noteService;
     }
 
+    /**
+     *
+     * @return
+     */
     @ApiOperation("Récupère une liste de toutes les notes")
     @GetMapping("")
     public List<Note> getNoteList(){
@@ -31,6 +42,11 @@ public class NoteController {
         return noteService.getNoteList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @ApiOperation("Récupère une note grâce à un id donné")
     @GetMapping("/{id}")
     public ResponseEntity<Note> getNoteById(@PathVariable("id") String id){
@@ -43,6 +59,11 @@ public class NoteController {
         }
     }
 
+    /**
+     *
+     * @param patientId
+     * @return
+     */
     @ApiOperation("Récupère une liste de note grâce à un patientId donné")
     @GetMapping("/patientId/{patientId}")
     public ResponseEntity<List<Note>> getNoteListByPatientId(@PathVariable("patientId") Long patientId){
@@ -55,6 +76,11 @@ public class NoteController {
         }
     }
 
+    /**
+     *
+     * @param noteDTO
+     * @return
+     */
     @ApiOperation("Ajoute une nouvelle note")
     @PostMapping("")
     public ResponseEntity<Note> postNote(@RequestBody NoteDTO noteDTO){
@@ -62,6 +88,12 @@ public class NoteController {
         return ResponseEntity.ok(noteService.addNote(noteDTO));
     }
 
+    /**
+     *
+     * @param id
+     * @param noteDTO
+     * @return
+     */
     @ApiOperation("Modifie une note déjà existante grâce à un id donné")
     @PutMapping("/{id}")
     public ResponseEntity<Note> putNoteById(@PathVariable("id") String id,@RequestBody NoteDTO noteDTO){
@@ -74,6 +106,11 @@ public class NoteController {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @ApiOperation("Supprime une note grâce à un id donné")
     @DeleteMapping("/{id}")
     public ResponseEntity<Note> deleteNoteById(@PathVariable("id") String id){
@@ -86,6 +123,11 @@ public class NoteController {
         }
     }
 
+    /**
+     *
+     * @param patientId
+     * @return
+     */
     @ApiOperation("Supprime une liste de note grâce à un patientId donné")
     @DeleteMapping("/patientId/{patientId}")
     public ResponseEntity<List<Note>> deleteNoteByPatientId(@PathVariable("patientId") Long patientId){

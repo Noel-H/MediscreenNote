@@ -19,6 +19,11 @@ public class NoteService {
 
     private final MediscreenPatientProxy mediscreenPatientProxy;
 
+    /**
+     * Note service constructor
+     * @param noteRepository is the note repository
+     * @param mediscreenPatientProxy is a proxy to the patient api
+     */
     public NoteService(NoteRepository noteRepository, MediscreenPatientProxy mediscreenPatientProxy){
         this.noteRepository = noteRepository;
         this.mediscreenPatientProxy = mediscreenPatientProxy;
@@ -94,6 +99,12 @@ public class NoteService {
         return note;
     }
 
+    /**
+     * Delete a list of note by a patientId
+     * @param patientId
+     * @return a list of note
+     * @throws NoSuchElementException if the patientId is not find
+     */
     public List<Note> deleteNoteByPatientId(Long patientId) throws NoSuchElementException{
         List<Note> noteList = getNoteListByPatientId(patientId);
         noteList.forEach(note -> deleteNote(note.getId()));
