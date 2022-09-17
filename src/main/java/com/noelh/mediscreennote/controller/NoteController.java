@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- *
+ * Note Controller
  */
 @Slf4j
 @RestController
@@ -24,16 +24,16 @@ public class NoteController {
     private final NoteService noteService;
 
     /**
-     *
-     * @param noteService
+     * Note controller constructor
+     * @param noteService used to perform operation
      */
     public NoteController(NoteService noteService){
         this.noteService = noteService;
     }
 
     /**
-     *
-     * @return
+     * Get a list of note
+     * @return a list who contains every note
      */
     @ApiOperation("Récupère une liste de toutes les notes")
     @GetMapping("")
@@ -43,9 +43,9 @@ public class NoteController {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Get a note by an id
+     * @param id used to get the wanted note
+     * @return a note or an error if the id is not found
      */
     @ApiOperation("Récupère une note grâce à un id donné")
     @GetMapping("/{id}")
@@ -60,9 +60,9 @@ public class NoteController {
     }
 
     /**
-     *
-     * @param patientId
-     * @return
+     * Get a list of note by a patientId
+     * @param patientId used to get the wanted list of note
+     * @return a list of note or an error if the patientId is not found
      */
     @ApiOperation("Récupère une liste de note grâce à un patientId donné")
     @GetMapping("/patientId/{patientId}")
@@ -77,9 +77,9 @@ public class NoteController {
     }
 
     /**
-     *
-     * @param noteDTO
-     * @return
+     * Add a new note
+     * @param noteDTO used to save the added a note
+     * @return the note
      */
     @ApiOperation("Ajoute une nouvelle note")
     @PostMapping("")
@@ -89,10 +89,10 @@ public class NoteController {
     }
 
     /**
-     *
-     * @param id
-     * @param noteDTO
-     * @return
+     * Update a note by an id
+     * @param id used to update the wanted note
+     * @param noteDTO used to save the updated note
+     * @return the updated note or an error if the id is not found
      */
     @ApiOperation("Modifie une note déjà existante grâce à un id donné")
     @PutMapping("/{id}")
@@ -107,9 +107,9 @@ public class NoteController {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Delete a note by an id
+     * @param id used to delete the wanted note
+     * @return the deleted note or an error if the id is not found
      */
     @ApiOperation("Supprime une note grâce à un id donné")
     @DeleteMapping("/{id}")
@@ -124,9 +124,9 @@ public class NoteController {
     }
 
     /**
-     *
-     * @param patientId
-     * @return
+     * Delete a list of note by a patientId
+     * @param patientId used to delete the wanted list of note
+     * @return the deleted list of note or an error if the patientId is not found
      */
     @ApiOperation("Supprime une liste de note grâce à un patientId donné")
     @DeleteMapping("/patientId/{patientId}")

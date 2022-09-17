@@ -101,7 +101,7 @@ public class NoteService {
 
     /**
      * Delete a list of note by a patientId
-     * @param patientId
+     * @param patientId used to delete the wanted list of note
      * @return a list of note
      * @throws NoSuchElementException if the patientId is not find
      */
